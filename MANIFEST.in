@@ -1,0 +1,9 @@
+include app.py
+include contract_template.docx
+include database.db
+include init_db.py
+include MANIFEST.in
+include pips
+include requirements.txt
+include template_basic_report.docx
+recursive-include templates *
