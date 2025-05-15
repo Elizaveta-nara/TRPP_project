@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-4 mb-3">Детали отчета</h1>
+
+<div class="container">
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Отчет #{{ report['number'] }}</h5>
+            <p><strong>Дата:</strong> {{ report['date'] }}</p>
+            <p><strong>Тип отчета:</strong> {{ report['report_type'] }}</p>
+            <p><strong>Описание:</strong> {{ report['description'] }}</p>
+            <p><strong>Период:</strong> {{ report['start_date'] }} - {{ report['end_date'] }}</p>
+            <p><strong>Составил:</strong> {{ report['employee_name'] }}</p>
+
+            <!-- Ссылка для генерации персонального отчета -->
+            <a href="{{ url_for('generate_personal_report', report_id=report['id']) }}" class="btn btn-primary">
+                <i class="bi-file-earmark-arrow-down"></i> Сгенерировать персональный отчет
+            </a>
+        </div>
+    </div>
+    <a href="{{ url_for('reports') }}" class="btn btn-secondary mt-3">Вернуться к списку отчетов</a>
+</div>
+{% endblock %}

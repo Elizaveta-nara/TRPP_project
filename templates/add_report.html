@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Добавление нового отчета {% endblock %}</h1>
+<br>
+<form method="post" class="px-4">
+    <div class="row mb-4">
+        <label for="number" class="col-sm-3 col-form-label">Номер отчета</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="number" value="{{ request.form['number'] }}" placeholder="Введите номер отчета...">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="date" class="col-sm-3 col-form-label">Дата отчета</label>
+        <div class="col-sm-8">
+            <input type="date" class="form-control" name="date" value="{{ request.form['date'] }}" placeholder="Введите дату отчета...">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="report_type" class="col-sm-3 col-form-label">Тип отчета</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="report_type" value="{{ request.form['report_type'] }}" placeholder="Введите тип отчета...">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="description" class="col-sm-3 col-form-label">Описание отчета</label>
+        <div class="col-sm-8">
+            <textarea class="form-control" name="description" placeholder="Введите описание отчета...">{{ request.form['description'] }}</textarea>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="employee_id" class="col-sm-3 col-form-label">Сотрудник</label>
+        <div class="col-sm-8">
+            <select class="form-control" name="employee_id" required>
+                <option value="">Выберите сотрудника</option>
+                {% for employee in employees %}
+                <option value="{{ employee['id'] }}">{{ employee['name'] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="start_date" class="col-sm-3 col-form-label">Начальная дата периода</label>
+        <div class="col-sm-8">
+            <input type="date" class="form-control" name="start_date" value="{{ request.form['start_date'] }}" placeholder="Введите начальную дату периода...">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="end_date" class="col-sm-3 col-form-label">Конечная дата периода</label>
+        <div class="col-sm-8">
+            <input type="date" class="form-control" name="end_date" value="{{ request.form['end_date'] }}" placeholder="Введите конечную дату периода...">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="bi-book"></i> Добавить отчет</button>
+</form>
+{% endblock %}

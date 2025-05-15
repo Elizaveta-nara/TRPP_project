@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Редактирование отчета {% endblock %}</h1>
+<br>
+<form method="post" class="px-4">
+    <!-- Скрытое поле для передачи report_id -->
+    <input type="hidden" name="report_id" value="{{ report['id'] }}">
+
+    <div class="row mb-4">
+        <label for="number" class="col-sm-3 col-form-label">Номер отчета</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="number" value="{{ report['number'] }}" placeholder="Введите номер отчета..." required>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="date" class="col-sm-3 col-form-label">Дата отчета</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="date" value="{{ report['date'] | format_date }}" placeholder="Введите дату в формате ДД.ММ.ГГГГ" required oninput="validateDate(this)">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="report_type" class="col-sm-3 col-form-label">Тип отчета</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="report_type" value="{{ report['report_type'] }}" placeholder="Введите тип отчета..." required>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="description" class="col-sm-3 col-form-label">Описание отчета</label>
+        <div class="col-sm-8">
+            <textarea class="form-control" name="description" placeholder="Введите описание отчета...">{{ report['description'] }}</textarea>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="employee_id" class="col-sm-3 col-form-label">Сотрудник</label>
+        <div class="col-sm-8">
+            <select class="form-control" name="employee_id" required>
+                <option value="">Выберите сотрудника</option>
+                {% for employee in employees %}
+                <option value="{{ employee['id'] }}" {% if employee['id'] == report['employee_id'] %}selected{% endif %}>
+                    {{ employee['name'] }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="start_date" class="col-sm-3 col-form-label">Начальная дата периода</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="start_date" value="{{ report['start_date'] | format_date }}" placeholder="Введите дату в формате ДД.ММ.ГГГГ" required oninput="validateDate(this)">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="end_date" class="col-sm-3 col-form-label">Конечная дата периода</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="end_date" value="{{ report['end_date'] | format_date }}" placeholder="Введите дату в формате ДД.ММ.ГГГГ" required oninput="validateDate(this)">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="bi-save"></i> Сохранить изменения</button>
+    <a href="{{ url_for('reports') }}" class="btn btn-secondary"><i class="bi-arrow-left"></i> Вернуться к списку</a>
+</form>
+
+<!-- Валидация даты на стороне клиента -->
+<script>
+    function validateDate(input) {
+        const datePattern = /^\d{2}\.\d{2}\.\d{4}$/; // Регулярное выражение для формата ДД.ММ.ГГГГ
+        if (!datePattern.test(input.value)) {
+            input.setCustomValidity('Пожалуйста, введите дату в формате ДД.ММ.ГГГГ');
+        } else {
+            input.setCustomValidity('');
+        }
+    }
+</script>
+{% endblock %}

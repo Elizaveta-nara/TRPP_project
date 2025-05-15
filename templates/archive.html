@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-4 mb-3">Архив договоров</h1>
+
+<div class="container">
+    <div class="row">
+        {% for repair in repairs %}
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <a href="{{ url_for('repair_details', repair_id=repair['id_repair']) }}" class="text-decoration-none text-primary">
+                        <b>Договор #{{ repair['number'] }} от {{ repair['date'] }}</b>
+                    </a>
+                    <!-- Отображение статуса ремонта -->
+                    <span class="badge bg-success">Завершен</span>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <strong>Автомобиль:</strong> {{ repair['car_model'] }} ({{ repair['license_plate'] }})<br>
+                        <strong>Вид работ:</strong> {{ repair['repair_type'] }}<br>
+                        <strong>Стоимость:</strong> {{ repair['start_price'] }} ₽<br>
+                    </p>
+
+                    <!-- Красивая полосочка -->
+                    <hr class="my-2 bg-primary" style="height: 2px;">
+                    <p class="text-muted">Клиент: {{ repair['client_name'] }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

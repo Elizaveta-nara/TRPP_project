@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-4 mb-3">Детали сотрудника</h1>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Позиция</th>
+                <th scope="col">Значение</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>ФИО сотрудника</td>
+                <td>{{ employee['name'] }}</td>
+            </tr>
+            <tr>
+                <td>Электронная почта</td>
+                <td>{{ employee['email'] }}</td>
+            </tr>
+            <tr>
+                <td>Номер телефона</td>
+                <td>{{ employee['phone_number'] }}</td>
+            </tr>
+            <tr>
+                <td>Должность</td>
+                <td>{{ employee['position'] }}</td>
+            </tr>
+            <tr>
+                <td>Отдел</td>
+                <td>{{ employee['department'] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ url_for('employees') }}" class="btn btn-secondary mt-3">Вернуться к списку сотрудников</a>
+</div>
+{% endblock %}
