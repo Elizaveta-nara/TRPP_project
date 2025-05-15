@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Отображение flash-сообщений -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h2>Редактирование параметров договора</h2>
+    <form method="POST" action="{{ url_for('generate_contract', repair_id=repair_id) }}">
+        <!-- Поля формы -->
+        <div class="mb-3">
+            <label for="contract_number" class="form-label">Номер договора</label>
+            <input type="text" class="form-control" id="contract_number" name="contract_number" value="{{ repair['number'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract_date" class="form-label">Дата договора</label>
+            <input type="text" class="form-control" id="contract_date" name="contract_date" value="{{ repair['date'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="client_fullname" class="form-label">ФИО клиента</label>
+            <input type="text" class="form-control" id="client_fullname" name="client_fullname" value="{{ repair['client_name'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="client_passport_number" class="form-label">Номер паспорта клиента</label>
+            <input type="text" class="form-control" id="client_passport_number" name="client_passport_number" value="{{ repair['client_passport'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="client_passport_department" class="form-label">Кем выдан паспорт</label>
+            <input type="text" class="form-control" id="client_passport_department" name="client_passport_department" required>
+        </div>
+        <div class="mb-3">
+            <label for="client_reg_address" class="form-label">Адрес регистрации клиента</label>
+            <input type="text" class="form-control" id="client_reg_address" name="client_reg_address" required>
+        </div>
+        <div class="mb-3">
+            <label for="employee_position" class="form-label">Должность сотрудника</label>
+            <input type="text" class="form-control" id="employee_position" name="employee_position" value="{{ repair['employee_position'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="employee_fullname" class="form-label">ФИО сотрудника</label>
+            <input type="text" class="form-control" id="employee_fullname" name="employee_fullname" value="{{ repair['employee_name'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="employee_attorney_power" class="form-label">Доверенность сотрудника</label>
+            <input type="text" class="form-control" id="employee_attorney_power" name="employee_attorney_power" required>
+        </div>
+        <div class="mb-3">
+            <label for="car_make" class="form-label">Марка автомобиля</label>
+            <input type="text" class="form-control" id="car_make" name="car_make" value="{{ repair['car_brand'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="car_model" class="form-label">Модель автомобиля</label>
+            <input type="text" class="form-control" id="car_model" name="car_model" value="{{ repair['car_model'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="car_license_plate" class="form-label">Гос. номер автомобиля</label>
+            <input type="text" class="form-control" id="car_license_plate" name="car_license_plate" value="{{ repair['license_plate'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract_deal_lastdate" class="form-label">Срок выполнения работ</label>
+            <input type="text" class="form-control" id="contract_deal_lastdate" name="contract_deal_lastdate" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract_lastdate" class="form-label">Срок действия договора</label>
+            <input type="text" class="form-control" id="contract_lastdate" name="contract_lastdate" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract_repair_price" class="form-label">Стоимость ремонта</label>
+            <input type="text" class="form-control" id="contract_repair_price" name="contract_repair_price" value="{{ repair['start_price'] }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract_deal_payment_info" class="form-label">Информация об оплате</label>
+            <input type="text" class="form-control" id="contract_deal_payment_info" name="contract_deal_payment_info" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract_deal_other_info" class="form-label">Дополнительная информация</label>
+            <input type="text" class="form-control" id="contract_deal_other_info" name="contract_deal_other_info" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract_award_percent" class="form-label">Процент вознаграждения</label>
+            <input type="text" class="form-control" id="contract_award_percent" name="contract_award_percent" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract_award_deadline" class="form-label">Срок оплаты</label>
+            <input type="text" class="form-control" id="contract_award_deadline" name="contract_award_deadline" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract_cancel_before" class="form-label">Срок уведомления о расторжении</label>
+            <input type="text" class="form-control" id="contract_cancel_before" name="contract_cancel_before" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Сгенерировать договор</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Добавление нового автомобиля {% endblock %}</h1>
+<br>
+<form method="post" class="px-4">
+    <div class="row mb-4">
+        <label for="brand" class="col-sm-3 col-form-label">Марка автомобиля</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="brand" value="{{ request.form['brand'] }}" placeholder="Введите марку автомобиля...">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="model" class="col-sm-3 col-form-label">Модель автомобиля</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="model" value="{{ request.form['model'] }}" placeholder="Введите модель автомобиля...">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="year" class="col-sm-3 col-form-label">Год выпуска автомобиля</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="year" value="{{ request.form['year'] }}" placeholder="Введите год выпуска автомобиля...">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="license_plate" class="col-sm-3 col-form-label">Государственный номер</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" name="license_plate" value="{{ request.form['license_plate'] }}" placeholder="Введите государственный номер...">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="service_history" class="col-sm-3 col-form-label">История обслуживания и ремонта автомобиля</label>
+        <div class="col-sm-8">
+            <textarea class="form-control" name="service_history" placeholder="Введите описание истории обслуживания и ремонта автомобиля">{{ request.form['service_history'] }}</textarea>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="bi-book"></i> Добавить автомобиль</button>
+</form>
+{% endblock %}
