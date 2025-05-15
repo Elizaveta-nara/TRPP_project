@@ -1,0 +1,17 @@
+pip install flask
+
+pip install python-docx
+
+pip install openpyxl
+
+pip install matplotlib
+
+pip install cryptography
+
+pip install Flask-WTF
+
+
+pip install reportlab
+
+
+pip install -r requirements.txt
